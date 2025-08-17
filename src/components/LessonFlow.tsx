@@ -19,8 +19,8 @@ const animationNotes: Record<string, string> = {
   "hemo-neural": "The flowing highlight shows blood flow affecting neural excitability. The dashed feedback line animates to show the bidirectional coupling - it's not just one-way nutrient delivery.",
   sohms: "The subtle drift of mode B shows these aren't static patterns but dynamic resonances. Real harmonic modes in the brain constantly shift and interact.",
   annealing: "The crossfade from jagged to smooth shows consolidation over time. This is how held patterns gradually reorganize into more harmonious, lower-energy configurations.",
-  "active-inference": "Static diagram - the cycle is conceptual rather than temporal, so animation wouldn't add clarity here.",
-  vasocomputation: "Static diagram - shows the relationship between the three hypotheses. The integrated dynamics are better shown in the interactive scenario."
+  "active-inference": "This loop runs continuously: predictions drive actions, actions change sensations, sensations update predictions. Notice it's a closed loop - there's no 'start' or 'end', just continuous cycling to minimize surprise.",
+  vasocomputation: "The three hypotheses form a cascade: CVH compresses ambiguity → VCH holds the result → LHH makes it persistent. Each circle represents a different timescale: CVH (milliseconds), VCH (seconds-minutes), LHH (minutes-years)."
 };
 
 // Helper to get concepts learned so far
