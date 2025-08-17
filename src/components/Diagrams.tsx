@@ -2,23 +2,34 @@
 
 export function ConceptDiagram({ id }: { id: string }) {
   if (id === "tanha") {
-    // Approach/avoid "grab" meter with threshold
+    // Approach/avoid "grab" meter with latch threshold
     return (
-      <svg className="w-full" viewBox="0 0 560 120" role="img" aria-label="Taṇhā grab meter with threshold">
+      <svg className="w-full" viewBox="0 0 560 140" role="img" aria-label="Taṇhā grab intensity and latch threshold">
         <defs>
           <marker id="arrowThin" markerWidth="10" markerHeight="10" refX="10" refY="3" orient="auto">
             <path d="M0,0 L0,6 L9,3 z" fill="#7dd3fc" />
           </marker>
         </defs>
-        <rect x="40" y="50" width="480" height="18" rx="9" fill="#0ea5e9" opacity=".15"/>
-        <rect x="40" y="50" width="260" height="18" rx="9" fill="#f472b6" opacity=".35"/>
-        <line x1="340" y1="45" x2="340" y2="75" stroke="#7dd3fc" strokeWidth="2" strokeDasharray="4 4"/>
-        <text x="340" y="38" textAnchor="middle" fill="#7dd3fc" fontSize="12">latch threshold</text>
-        <text x="40" y="100" fill="#e2e8f0" fontSize="12">push away ←</text>
-        <text x="500" y="100" fill="#e2e8f0" fontSize="12" textAnchor="end">→ grasp</text>
-        <line x1="300" y1="20" x2="340" y2="45" stroke="#7dd3fc" strokeWidth="2" markerEnd="url(#arrowThin)"/>
-        <text x="298" y="16" fill="#94a3b8" fontSize="12" textAnchor="end">grab (25-100ms)</text>
-        <text x="180" y="65" fill="#e2e8f0" fontSize="11" textAnchor="middle">tension/suffering</text>
+        {/* Main tension bar */}
+        <rect x="40" y="60" width="480" height="20" rx="10" fill="#0ea5e9" opacity=".15"/>
+        <rect x="40" y="60" width="180" height="20" rx="10" fill="#94a3b8" opacity=".4"/>
+        {/* Quick grab zone */}
+        <rect x="40" y="60" width="180" height="20" rx="10" fill="none" stroke="#10b981" strokeWidth="1.5" strokeDasharray="3 3"/>
+        <text x="130" y="55" fill="#10b981" fontSize="11" textAnchor="middle">quick grab (reversible)</text>
+        {/* Latch threshold line */}
+        <line x1="340" y1="55" x2="340" y2="85" stroke="#f472b6" strokeWidth="2.5"/>
+        <text x="340" y="48" textAnchor="middle" fill="#f472b6" fontSize="12">latch threshold</text>
+        {/* Latch zone */}
+        <rect x="340" y="60" width="180" height="20" rx="10" fill="#f472b6" opacity=".25"/>
+        <text x="430" y="100" fill="#f472b6" fontSize="11" textAnchor="middle">latch zone (sticky)</text>
+        {/* Labels */}
+        <text x="40" y="130" fill="#e2e8f0" fontSize="12">push away ←</text>
+        <text x="500" y="130" fill="#e2e8f0" fontSize="12" textAnchor="end">→ grasp</text>
+        {/* Arrows showing progression */}
+        <line x1="160" y1="25" x2="180" y2="55" stroke="#10b981" strokeWidth="1.5" markerEnd="url(#arrowThin)"/>
+        <text x="158" y="20" fill="#10b981" fontSize="11" textAnchor="end">grab (25-100ms)</text>
+        <line x1="380" y1="25" x2="400" y2="55" stroke="#f472b6" strokeWidth="1.5" markerEnd="url(#arrowThin)"/>
+        <text x="382" y="20" fill="#f472b6" fontSize="11" textAnchor="start">if held → latch</text>
       </svg>
     );
   }
