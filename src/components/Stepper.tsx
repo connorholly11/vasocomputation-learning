@@ -13,6 +13,7 @@ export default function Stepper({ currentId }: { currentId: string }) {
         <Link
           key={id}
           href={`/learn/${id}`}
+          scroll={false}
           className={`flex-shrink-0 rounded px-3 py-1 text-sm ${
             id === currentId
               ? "bg-sky-600 text-white"

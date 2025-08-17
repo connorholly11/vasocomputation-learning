@@ -50,14 +50,34 @@ export default function ConceptGraph({ selected, onSelect, height = 580 }: Props
       .attr("stroke-width", 1.2)
       .attr("marker-end", "url(#arrow)");
 
+    // Drag behavior
+    const dragHandler = d3.drag<SVGGElement, any>()
+      .on("start", function(event, d) {
+        if (!event.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x;
+        d.fy = d.y;
+        d3.select(this).style("cursor", "grabbing");
+      })
+      .on("drag", function(event, d) {
+        d.fx = event.x;
+        d.fy = event.y;
+      })
+      .on("end", function(event, d) {
+        if (!event.active) simulation.alphaTarget(0);
+        d.fx = null;
+        d.fy = null;
+        d3.select(this).style("cursor", "grab");
+      });
+
     const node = g
       .selectAll("g.node")
       .data(nodes)
       .enter()
       .append("g")
       .attr("class", "node")
-      .style("cursor", "pointer")
-      .on("click", (_, d: any) => onSelect(d.id));
+      .style("cursor", "grab")
+      .on("click", (_, d: any) => onSelect(d.id))
+      .call(dragHandler);
 
     node
       .append("circle")
