@@ -7,10 +7,13 @@ export default function Playground() {
   const [predictionRate, setPredictionRate] = useState(40); // items/min
   const [controlAbility, setControlAbility] = useState(50); // %
   const [duration, setDuration] = useState(20); // seconds sustained
+  const [releaseRate, setReleaseRate] = useState(30); // %/min
 
   // toy formulas to illustrate ideas
   const tension = useMemo(() => clamp(predictionRate * (1 - controlAbility/100)), [predictionRate, controlAbility]);
-  const latchRisk = useMemo(() => clamp((tension/100) * (duration/30) * 100), [tension, duration]);
+  const netTension = useMemo(() => clamp(tension - (releaseRate/100) * tension, 0, 100), [tension, releaseRate]);
+  const latchThreshold = 60;
+  const latchRisk = useMemo(() => clamp((netTension / latchThreshold) * (duration/30) * 100, 0, 100), [netTension, duration, latchThreshold]);
 
   return (
     <section className="space-y-6">
@@ -38,16 +41,24 @@ export default function Playground() {
             <input type="range" min={0} max={120} value={duration} onChange={(e)=>setDuration(+e.target.value)} />
             <div className="text-slate-300">{duration}s</div>
           </div>
+          <div>
+            <label className="block text-sm text-slate-400">Release (relaxation) rate</label>
+            <input type="range" min={0} max={100} value={releaseRate} onChange={(e)=>setReleaseRate(+e.target.value)} />
+            <div className="text-slate-300">{releaseRate}%/min</div>
+          </div>
         </div>
 
         <div className="card p-6">
           <h3 className="mb-2 font-semibold">Outputs</h3>
           <div className="mb-4">
-            <div className="mb-1 text-slate-300">Vascular tension (proxy)</div>
-            <div className="h-3 w-full rounded bg-slate-800">
-              <div className="h-full rounded bg-sky-500 transition-all" style={{ width: `${tension}%` }} />
+            <div className="mb-1 text-slate-300">Vascular tension (net)</div>
+            <div className="relative h-3 w-full rounded bg-slate-800">
+              <div className="h-full rounded bg-sky-500 transition-all" style={{ width: `${netTension}%` }} />
+              <div className="absolute inset-y-0" style={{ left: `${latchThreshold}%` }}>
+                <div className="h-full w-px border-l border-dashed border-fuchsia-400" />
+              </div>
             </div>
-            <div className="mt-1 text-sm text-slate-400">{tension.toFixed(0)} / 100</div>
+            <div className="mt-1 text-sm text-slate-400">{netTension.toFixed(0)} / 100</div>
           </div>
 
           <div className="mb-2">

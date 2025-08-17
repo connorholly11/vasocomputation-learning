@@ -37,7 +37,7 @@ export default function Quiz({ question, options, answerIndex, explain }: Props)
         {done ? "Submitted ✓" : "Submit"}
       </button>
       {done && (
-        <p className="mt-3 text-sm text-slate-300">
+        <p className="mt-3 text-sm text-slate-300" aria-live="polite">
           {picked === answerIndex ? "Correct! " : "Not quite. "}
           {explain}
         </p>

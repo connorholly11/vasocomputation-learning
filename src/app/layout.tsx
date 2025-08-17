@@ -1,4 +1,7 @@
-export const metadata = {
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   title: "Vasocomputation 101",
   description:
     "An interactive guide to Michael Edward Johnson's Vasocomputation, prerequisites, and core hypotheses.",
@@ -21,8 +24,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </Link>
               <div className="flex gap-4 text-sm">
                 <Link href="/learn" className="hover:underline">Learn</Link>
-                <Link href="/map" className="hover:underline">Map</Link>
-                <Link href="/playground" className="hover:underline">Playground</Link>
                 <Link href="/sources" className="hover:underline">Sources</Link>
               </div>
             </nav>

@@ -2,6 +2,13 @@ import { wrap } from "./utils";
 
 export type Ref = { title: string; url: string };
 export type Quiz = { question: string; options: string[]; answerIndex: number; explain: string };
+export type LessonSection = { id: string; title: string; content: string };
+export type ExerciseModel = {
+  id: string;
+  type: "reflect" | "thought" | "mini";
+  prompt: string;
+  details?: string;
+};
 export type Concept = {
   id: string;
   title: string;
@@ -10,6 +17,14 @@ export type Concept = {
   prereqs: string[];
   references: Ref[];
   quiz?: Quiz;
+  eli5?: string;
+  deep?: string;
+  keywords?: string[];
+  sections?: LessonSection[];
+  exercises?: ExerciseModel[];
+  hasDiagram?: boolean;
+  connections?: { id: string; relation: string }[];
+  applications?: string[];
 };
 export type LessonMeta = { id: string; title: string; summary: string; minutes: number };
 
@@ -40,7 +55,61 @@ export const concepts: Record<string, Concept> = {
       ],
       answerIndex: 0,
       explain: "Compressive Vasomotion, Vascular Clamp, and Latched Hyperprior hypotheses make up the working set."
-    }
+    },
+    eli5: "Predictions feel like tiny 'holds' in the body. This model says those holds are literally patterns of vascular tension that can stick if we keep holding them.",
+    deep: wrap(
+      "Vasocomputation posits VSMC-mediated tension as a substrate for short-to-medium term prediction holding. CVH applies compression pressure to disambiguate resonant modes; VCH locally clamps neural dynamics to maintain a prediction; and LHH leverages latch-bridge mechanics to create low-energy, slowly-decaying hyperpriors. Releasing maladaptive predictions widens accessible system dynamics."
+    ),
+    keywords: ["vasocomputation", "CVH", "VCH", "LHH", "hyperprior", "tension"],
+    hasDiagram: true,
+    sections: [
+      {
+        id: "phenomenology",
+        title: "Phenomenological Level",
+        content: wrap(
+          "At the experiential level, vasocomputation explains taṇhā—the grabby reflex toward or away from sensations. This grasping creates felt tension that corresponds to vascular compression patterns. When we notice this grabbing in real-time, we can choose to release it, reducing both subjective suffering and physiological tension."
+        )
+      },
+      {
+        id: "computational",
+        title: "Computational Level",
+        content: wrap(
+          "Active Inference provides the computational framework: brains generate predictions and act to make them true. Vasocomputation proposes that these predictions are literally held as patterns of vascular smooth muscle contraction, creating a physical substrate for predictive processing."
+        )
+      },
+      {
+        id: "physical",
+        title: "Physical Substrate",
+        content: wrap(
+          "Vascular smooth muscle cells (VSMCs) throughout the body can contract and relax, modulating local blood flow and neural activity. The three core hypotheses (CVH, VCH, LHH) describe how these contractions implement prediction holding, disambiguation, and long-term biasing."
+        )
+      }
+    ],
+    exercises: [
+      {
+        id: "notice-tension",
+        type: "reflect",
+        prompt: "For the next few minutes, notice any areas of bodily tension. Can you connect these to specific thoughts, predictions, or emotional states?",
+        details: "This helps develop awareness of the mind-body connection central to vasocomputation."
+      },
+      {
+        id: "release-experiment",
+        type: "mini",
+        prompt: "Try consciously relaxing an area of tension while maintaining the same thought or emotional state.",
+        details: "Notice if releasing physical tension affects your mental state or the persistence of thoughts."
+      }
+    ],
+    connections: [
+      { id: "tanha", relation: "provides phenomenological foundation" },
+      { id: "active-inference", relation: "provides computational framework" },
+      { id: "latch-bridge", relation: "provides physical mechanism" }
+    ],
+    applications: [
+      "Meditation and mindfulness practices",
+      "Understanding psychosomatic symptoms",
+      "Developing body-aware therapeutic interventions",
+      "Bridging contemplative practice with neuroscience"
+    ]
   },
 
   // Phenomenology
@@ -60,7 +129,54 @@ export const concepts: Record<string, Concept> = {
       options: ["Slow homeostatic drift", "A fast grabby reflex toward/away from sensations", "Random noise", "A muscle tear"],
       answerIndex: 1,
       explain: "Johnson highlights taṇhā as a quick 'grab' dynamic that maps onto prediction/compression drives."
-    }
+    },
+    sections: [
+      {
+        id: "recognition",
+        title: "Recognizing the Grab",
+        content: wrap(
+          "Taṇhā manifests as a quick, often unconscious movement toward pleasant experiences and away from unpleasant ones. This isn't just psychological—it has a felt, embodied quality. Learning to catch this reflex in real-time is the first step in working with it skillfully."
+        )
+      },
+      {
+        id: "embodiment",
+        title: "Embodied Grasping",
+        content: wrap(
+          "The 'grab' isn't just mental—it creates physical tension. You might notice shoulders tensing when avoiding difficulty, or a reaching quality when pursuing pleasure. Vasocomputation suggests these tensions are vascular compressions that literally hold predictions in place."
+        )
+      },
+      {
+        id: "release",
+        title: "The Art of Release",
+        content: wrap(
+          "Once you notice taṇhā in action, you can experiment with releasing it. This doesn't mean suppressing the experience, but rather letting go of the grabby reflex itself. Often this creates immediate relief and opens up new possibilities for response."
+        )
+      }
+    ],
+    exercises: [
+      {
+        id: "grab-detection",
+        type: "reflect",
+        prompt: "Notice the next time you experience something pleasant or unpleasant. Can you catch the subtle 'grab' or 'push' in your body-mind?",
+        details: "Start with strong experiences where the grab is more obvious, then work toward subtler ones."
+      },
+      {
+        id: "release-practice",
+        type: "mini",
+        prompt: "When you notice grasping, try consciously softening without changing the experience itself.",
+        details: "The goal isn't to stop having preferences, but to hold them more lightly."
+      }
+    ],
+    connections: [
+      { id: "cvh", relation: "creates compression patterns" },
+      { id: "vasocomputation", relation: "provides mechanistic foundation" }
+    ],
+    applications: [
+      "Mindfulness meditation",
+      "Reducing reactive patterns",
+      "Improving emotional regulation",
+      "Developing equanimity"
+    ]
   },
 
   // Active inference
@@ -85,7 +201,61 @@ export const concepts: Record<string, Concept> = {
       ],
       answerIndex: 1,
       explain: "Minimizing free energy (prediction error) binds action and perception."
-    }
+    },
+    eli5: "Your brain is always guessing what will happen next and moves your body to make those guesses come true as cheaply as possible.",
+    deep: wrap(
+      "Perception and action jointly minimize variational free energy by aligning predictions with sensory input. Control signals can be framed as predictions at deeper levels. In vasocomputation, such predictions may be instantiated via transient vascular tension patterns that locally stabilize neural dynamics until prediction errors are resolved."
+    ),
+    keywords: ["free energy", "prediction", "control", "perception-action"],
+    hasDiagram: true,
+    sections: [
+      {
+        id: "prediction-cycle",
+        title: "The Prediction-Action Cycle",
+        content: wrap(
+          "Active inference describes a continuous loop: the brain predicts what sensations should arise, compares these predictions with actual input, and acts to minimize any discrepancy. This creates a unified framework where perception and action work together to minimize surprise."
+        )
+      },
+      {
+        id: "free-energy",
+        title: "Free Energy Minimization",
+        content: wrap(
+          "Free energy is a measure of surprise or prediction error. The brain constantly works to minimize this by either updating its predictions (perception) or changing the world to match predictions (action). This principle explains both learning and behavior."
+        )
+      },
+      {
+        id: "hierarchical",
+        title: "Hierarchical Processing",
+        content: wrap(
+          "Active inference operates at multiple levels simultaneously. Higher levels make more abstract, longer-term predictions, while lower levels handle immediate sensorimotor control. This hierarchy allows for both rapid reflexes and complex planning."
+        )
+      }
+    ],
+    exercises: [
+      {
+        id: "prediction-awareness",
+        type: "reflect",
+        prompt: "Before reaching for an object, pause and notice your predictions: where is it, how heavy will it be, how your hand should move?",
+        details: "This exercise builds awareness of the constant predictive processing underlying simple actions."
+      },
+      {
+        id: "surprise-tracking",
+        type: "thought",
+        prompt: "Think of a recent surprise. How did your brain quickly update its predictions to accommodate the new information?",
+        details: "Understanding how surprise drives learning illuminates the active inference process."
+      }
+    ],
+    connections: [
+      { id: "vch", relation: "predictions held as vascular tension" },
+      { id: "vasocomputation", relation: "provides physical substrate for predictions" },
+      { id: "sohms", relation: "resonant modes as prediction carriers" }
+    ],
+    applications: [
+      "Understanding learning and adaptation",
+      "Developing predictive AI systems",
+      "Explaining perception-action coupling",
+      "Therapeutic interventions for prediction errors"
+    ]
   },
 
   // SOHMs / resonance
@@ -128,6 +298,60 @@ export const concepts: Record<string, Concept> = {
     references: [
       { title: "Murphy (2005) Latch‑Bridge hypothesis", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC2278007/" },
       { title: "Hai & Murphy (1988) Latch state model", url: "https://pubmed.ncbi.nlm.nih.gov/3337223/" }
+    ],
+    eli5: "Smooth muscles have a 'sticky gear' that lets them hold tension without spending much energy.",
+    deep: wrap(
+      "Cross-bridge cycling can enter a slowly detaching state (latch) where force is maintained with reduced ATP turnover. In VSMCs, this provides a mechanism for low-energy persistence of constriction, offering a substrate for 'latched hyperpriors' that bias inference/action until released or remodeled."
+    ),
+    keywords: ["smooth muscle", "cross-bridge", "energy", "hyperprior"],
+    hasDiagram: true,
+    sections: [
+      {
+        id: "mechanism",
+        title: "Molecular Mechanism",
+        content: wrap(
+          "In smooth muscle, myosin cross-bridges can enter a 'latch' state where they remain attached to actin with very slow detachment rates. This allows sustained force generation with minimal ongoing ATP consumption—a highly energy-efficient way to maintain tension over long periods."
+        )
+      },
+      {
+        id: "vascular-context",
+        title: "Vascular Applications",
+        content: wrap(
+          "Vascular smooth muscle cells throughout the body can utilize latch-bridge mechanics to maintain vessel constriction with minimal metabolic cost. This provides a plausible physical substrate for 'holding' predictions or biases over extended timeframes."
+        )
+      },
+      {
+        id: "computational",
+        title: "Computational Implications",
+        content: wrap(
+          "If predictions are held as vascular tensions, the latch-bridge mechanism offers a way for these 'hyperpriors' to persist with minimal energy expenditure. This could explain how certain cognitive or emotional patterns become 'sticky' and resistant to change."
+        )
+      }
+    ],
+    exercises: [
+      {
+        id: "tension-holding",
+        type: "reflect",
+        prompt: "Think of a persistent emotional or mental pattern you have. Does it feel like it 'holds itself' with minimal effort?",
+        details: "This analogy helps understand how latched patterns might feel subjectively."
+      },
+      {
+        id: "release-experiment",
+        type: "mini",
+        prompt: "Try holding physical tension (like clenching your jaw) and then consciously releasing it. Notice the 'letting go' sensation.",
+        details: "This gives a bodily sense of what unlatching might feel like."
+      }
+    ],
+    connections: [
+      { id: "lhh", relation: "provides mechanism for latched hyperpriors" },
+      { id: "vasocomputation", relation: "enables persistent prediction holding" },
+      { id: "vch", relation: "supports long-term vascular clamping" }
+    ],
+    applications: [
+      "Understanding chronic tension patterns",
+      "Explaining persistent cognitive biases",
+      "Developing somatic therapies",
+      "Insights into trauma and holding patterns"
     ]
   },
 

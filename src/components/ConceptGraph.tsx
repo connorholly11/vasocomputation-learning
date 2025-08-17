@@ -4,9 +4,9 @@ import { useEffect, useMemo, useRef } from "react";
 import { concepts } from "@/lib/concepts";
 import { useProgress } from "./ProgressProvider";
 
-type Props = { selected: string; onSelect: (id: string) => void };
+type Props = { selected: string; onSelect: (id: string) => void; height?: number };
 
-export default function ConceptGraph({ selected, onSelect }: Props) {
+export default function ConceptGraph({ selected, onSelect, height = 580 }: Props) {
   const ref = useRef<SVGSVGElement | null>(null);
   const { completed } = useProgress();
 
@@ -24,7 +24,7 @@ export default function ConceptGraph({ selected, onSelect }: Props) {
     svg.selectAll("*").remove();
 
     const width = ref.current!.clientWidth;
-    const height = 580;
+    // height is now passed as prop
 
     const simulation = d3
       .forceSimulation(nodes as any)
@@ -61,12 +61,13 @@ export default function ConceptGraph({ selected, onSelect }: Props) {
 
     node
       .append("circle")
-      .attr("r", (d: any) => (d.id === selected ? 18 : 13))
+      .attr("r", (d: any) => (d.id === selected ? 20 : 13))
       .attr("fill", (d: any) =>
         d.id === "vasocomputation" ? "#0ea5e9" : completed.has(d.id) ? "#10b981" : "#94a3b8"
       )
       .attr("stroke", "#0b1020")
-      .attr("stroke-width", 2);
+      .attr("stroke-width", 2)
+      .style("filter", (d: any) => (d.id === selected ? "drop-shadow(0 0 10px rgba(14,165,233,.6))" : "none"));
 
     node
       .append("text")
@@ -106,5 +107,5 @@ export default function ConceptGraph({ selected, onSelect }: Props) {
     };
   }, [nodes, links, onSelect, selected, completed]);
 
-  return <svg ref={ref} className="h-[580px] w-full"></svg>;
+  return <svg ref={ref} className="w-full" style={{ height }}></svg>;
 }
