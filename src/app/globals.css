@@ -55,3 +55,29 @@ input[type="range"]{ accent-color: var(--brand); }
   .animate-flow-in { animation: none; }
   .confetti { display: none; }
 }
+
+/* --- Motion utilities for animated diagrams --- */
+svg .origin-left { transform-box: fill-box; transform-origin: left center; }
+svg .origin-center { transform-box: fill-box; transform-origin: center; }
+
+@keyframes breath-x { 0%,100% { transform: scaleX(1); } 50% { transform: scaleX(.72); } }
+@keyframes sweep-x { 0% { transform: translateX(0); } 100% { transform: translateX(60px); } }
+@keyframes slide-wide { 0% { transform: translateX(0); } 100% { transform: translateX(480px); } }
+@keyframes drift { 0% { transform: translateX(0); } 100% { transform: translateX(40px); } }
+@keyframes pulse { 0%,100% { opacity:.65; } 50% { opacity:1; } }
+@keyframes dash { to { stroke-dashoffset: 0; } }
+@keyframes crossfade { 0% { opacity:1; } 50% { opacity:0; } 100% { opacity:1; } }
+
+.anim-breath { animation: breath-x 3s ease-in-out infinite; }
+.anim-sweep { animation: sweep-x 4s linear infinite; }
+.anim-slide-wide { animation: slide-wide 6s linear infinite; }
+.anim-drift { animation: drift 2.8s ease-in-out infinite alternate; }
+.anim-pulse { animation: pulse 2s ease-in-out infinite; }
+.anim-dash { animation: dash 2.4s linear infinite; }
+.anim-crossfade-out { animation: crossfade 5s ease-in-out infinite; }
+.anim-crossfade-in { animation: crossfade 5s ease-in-out infinite reverse; }
+.paused { animation-play-state: paused !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-breath, .anim-sweep, .anim-slide-wide, .anim-drift, .anim-pulse, .anim-dash, .anim-crossfade-out, .anim-crossfade-in { animation: none !important; }
+}
