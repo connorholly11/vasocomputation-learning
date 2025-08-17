@@ -17,3 +17,41 @@ a{color:var(--ring);}
 .btn{ @apply inline-flex items-center justify-center rounded-lg border border-sky-600/50 px-4 py-2 hover:bg-sky-600/10 transition; }
 .badge{ @apply inline-block rounded-full border border-slate-700 px-2 py-0.5 text-xs text-slate-300; }
 input[type="range"]{ accent-color: var(--brand); }
+
+/* REPOMARK:SCOPE: 1 - Append depth tokens and motion polish at end of file */
+:root {
+  --shadow-1: 0 1px 1px rgba(2, 8, 23, .25), 0 8px 20px rgba(2, 8, 23, .25);
+  --shadow-glow: 0 0 0 1px rgba(125, 211, 252, .18), 0 0 24px rgba(14, 165, 233, .18);
+}
+
+/* Flow in */
+@keyframes flow-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-flow-in {
+  animation: flow-in .24s cubic-bezier(.19,1,.22,1);
+}
+
+/* Confetti sparkle (very light, reduced-motion safe) */
+@keyframes confetti-pop {
+  0% { transform: translate(-50%, -50%) scale(.6); opacity: .9; }
+  100% { transform: translate(-50%, -200%) scale(1); opacity: 0; }
+}
+.confetti {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  pointer-events: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 30% 30%, #7dd3fc, #f472b6);
+  filter: drop-shadow(0 0 12px rgba(125,211,252,.35));
+  animation: confetti-pop 1.2s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-flow-in { animation: none; }
+  .confetti { display: none; }
+}

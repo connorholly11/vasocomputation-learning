@@ -1,5 +1,17 @@
 import { wrap } from "./utils";
 
+export type ScenarioConfig = {
+  enabled: boolean;
+  threshold?: number;
+  labels?: {
+    grab?: string;
+    awareness?: string;
+    releaseRate?: string;
+    metric?: string;
+    goal?: string;
+  };
+};
+
 export type Ref = { title: string; url: string };
 export type Quiz = { question: string; options: string[]; answerIndex: number; explain: string };
 export type LessonSection = { id: string; title: string; content: string };
@@ -25,6 +37,7 @@ export type Concept = {
   hasDiagram?: boolean;
   connections?: { id: string; relation: string }[];
   applications?: string[];
+  scenario?: ScenarioConfig;
 };
 export type LessonMeta = { id: string; title: string; summary: string; minutes: number };
 
@@ -62,6 +75,17 @@ export const concepts: Record<string, Concept> = {
     ),
     keywords: ["vasocomputation", "CVH", "VCH", "LHH", "hyperprior", "tension"],
     hasDiagram: true,
+    scenario: {
+      enabled: true,
+      threshold: 0.3,
+      labels: {
+        grab: "Prediction Holding",
+        awareness: "Pattern Recognition",
+        releaseRate: "Release Rate",
+        metric: "System Flexibility",
+        goal: "Balanced Dynamics"
+      }
+    },
     sections: [
       {
         id: "phenomenology",
@@ -130,6 +154,17 @@ export const concepts: Record<string, Concept> = {
       answerIndex: 1,
       explain: "Johnson highlights taṇhā as a quick 'grab' dynamic that maps onto prediction/compression drives."
     },
+    scenario: {
+      enabled: true,
+      threshold: 0.4,
+      labels: {
+        grab: "Grasping Intensity",
+        awareness: "Recognition Clarity",
+        releaseRate: "Letting Go",
+        metric: "Tension Level",
+        goal: "Equanimity"
+      }
+    },
     sections: [
       {
         id: "recognition",
@@ -143,6 +178,13 @@ export const concepts: Record<string, Concept> = {
         title: "Embodied Grasping",
         content: wrap(
           "The 'grab' isn't just mental—it creates physical tension. You might notice shoulders tensing when avoiding difficulty, or a reaching quality when pursuing pleasure. Vasocomputation suggests these tensions are vascular compressions that literally hold predictions in place."
+        )
+      },
+      {
+        id: "mechanism",
+        title: "Vascular Compression Patterns",
+        content: wrap(
+          "At the physiological level, taṇhā corresponds to rapid changes in vascular smooth muscle tone. When we grasp toward pleasure or push away from pain, specific patterns of vessel constriction emerge that literally 'hold' the prediction in the body's tissues."
         )
       },
       {
@@ -269,6 +311,30 @@ export const concepts: Record<string, Concept> = {
     prereqs: [],
     references: [
       { title: "Safron (2020) Integrated World Modeling Theory (SOHMs)", url: "https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2020.00030/full" }
+    ],
+    hasDiagram: true,
+    sections: [
+      {
+        id: "felt-resonance",
+        title: "Feeling Resonant Patterns",
+        content: wrap(
+          "SOHMs aren't just abstract mathematical structures—they have a felt quality. When multiple brain regions synchronize into a harmonic mode, this creates a distinct experiential signature. You might notice this as the 'coming together' feeling when understanding a complex idea or the coherent quality of focused attention."
+        )
+      },
+      {
+        id: "embodied-modes",
+        title: "Embodied Harmonic Experience",
+        content: wrap(
+          "These resonant modes extend beyond the brain into the entire body. Emotional states, for instance, involve characteristic patterns of neural-somatic resonance. The feeling of 'being in flow' reflects a particularly coherent and stable harmonic mode across multiple systems."
+        )
+      },
+      {
+        id: "vascular-modulation",
+        title: "Vascular Modulation of Modes",
+        content: wrap(
+          "Vasocomputation proposes that vascular smooth muscle contractions can selectively pressure different resonant modes, effectively 'tuning' the brain's harmonic landscape. This provides a mechanism for how predictions and attention can bias which patterns of activity emerge and stabilize."
+        )
+      }
     ]
   },
 
@@ -283,6 +349,30 @@ export const concepts: Record<string, Concept> = {
     prereqs: [],
     references: [
       { title: "Moore & Cao (2008) Hemo‑Neural Hypothesis", url: "https://pubmed.ncbi.nlm.nih.gov/17913979/" }
+    ],
+    hasDiagram: true,
+    sections: [
+      {
+        id: "felt-flow",
+        title: "Sensing Blood Flow Changes",
+        content: wrap(
+          "Changes in local blood flow create subtle but detectable shifts in sensation. You might notice this as the warm spreading feeling when blood vessels dilate, or the tight, constrictive quality when they constrict. These aren't just side effects—they're part of the informational content."
+        )
+      },
+      {
+        id: "cognitive-shifts",
+        title: "Hemodynamic Cognitive States",
+        content: wrap(
+          "Different patterns of blood flow correspond to distinct cognitive states. The focused clarity of deep concentration involves different vascular patterns than the expansive awareness of creative insight. Learning to recognize these hemodynamic signatures can enhance metacognitive awareness."
+        )
+      },
+      {
+        id: "computational-coupling",
+        title: "Computation-Circulation Coupling",
+        content: wrap(
+          "The hemo-neural hypothesis suggests that blood flow changes aren't just supporting neural computation—they're participating in it. Vascular smooth muscle contractions can create local pressure changes that directly influence neural firing patterns and information processing."
+        )
+      }
     ]
   },
 
@@ -305,6 +395,17 @@ export const concepts: Record<string, Concept> = {
     ),
     keywords: ["smooth muscle", "cross-bridge", "energy", "hyperprior"],
     hasDiagram: true,
+    scenario: {
+      enabled: true,
+      threshold: 0.35,
+      labels: {
+        grab: "Tension Holding",
+        awareness: "Latch Detection",
+        releaseRate: "Release Rate",
+        metric: "Energy Efficiency",
+        goal: "Optimal Tension"
+      }
+    },
     sections: [
       {
         id: "mechanism",
@@ -366,6 +467,30 @@ export const concepts: Record<string, Concept> = {
     prereqs: ["tanha", "sohms"],
     references: [
       { title: "Vasocomputation Part I — CVH section", url: "https://opentheory.net/2023/07/principles-of-vasocomputation-a-unification-of-buddhist-phenomenology-active-inference-and-physical-reflex-part-i/" }
+    ],
+    hasDiagram: true,
+    sections: [
+      {
+        id: "compression-feeling",
+        title: "Feeling Compression Dynamics",
+        content: wrap(
+          "Compressive vasomotion has a distinct felt quality—like a wave of pressure that moves through experience, collapsing uncertainty into specificity. You might notice this when an ambiguous situation suddenly 'clicks' into clarity, often accompanied by a sense of tension or compression."
+        )
+      },
+      {
+        id: "disambiguation",
+        title: "The Disambiguation Process",
+        content: wrap(
+          "When faced with ambiguous sensory input, the mind-body system applies compression pressure to force a specific interpretation. This feels like a narrowing or focusing, where multiple possibilities collapse into a single, definite perception or understanding."
+        )
+      },
+      {
+        id: "vasomotion-waves",
+        title: "Vasomotion as Pattern Collapse",
+        content: wrap(
+          "Rhythmic vasomotion—the spontaneous oscillation of vascular smooth muscle—creates waves of compression that sweep through neural tissue. These waves physically compress resonant modes, forcing ambiguous patterns to stabilize into specific configurations."
+        )
+      }
     ]
   },
 
@@ -379,6 +504,30 @@ export const concepts: Record<string, Concept> = {
     prereqs: ["active-inference", "hemo-neural"],
     references: [
       { title: "Vasocomputation Part I — VCH section", url: "https://opentheory.net/2023/07/principles-of-vasocomputation-a-unification-of-buddhist-phenomenology-active-inference-and-physical-reflex-part-i/" }
+    ],
+    hasDiagram: true,
+    sections: [
+      {
+        id: "clamping-sensation",
+        title: "The Felt Sense of Clamping",
+        content: wrap(
+          "Vascular clamping creates a distinctive sensation of 'holding' or 'freezing' in specific areas of the body. You might notice this as a quality of fixation—where attention or sensation gets locked in place, creating a sense of rigidity or immobility in both mind and body."
+        )
+      },
+      {
+        id: "prediction-holding",
+        title: "Embodied Prediction Storage",
+        content: wrap(
+          "When the system makes a prediction, vascular clamps can literally hold that prediction 'in place' by constraining local neural dynamics. This feels like carrying a specific expectation or intention in the body—a somatic commitment to a particular outcome."
+        )
+      },
+      {
+        id: "clamp-mechanism",
+        title: "Local Dynamic Constraint",
+        content: wrap(
+          "Vascular smooth muscle contractions create localized pressure that constrains nearby neural activity to specific patterns. This acts like a biological 'register' that can maintain a prediction or intention until it's either fulfilled, consolidated into long-term memory, or actively released."
+        )
+      }
     ]
   },
 
@@ -392,6 +541,41 @@ export const concepts: Record<string, Concept> = {
     prereqs: ["latch-bridge", "vch"],
     references: [
       { title: "Vasocomputation Part I — LHH section", url: "https://opentheory.net/2023/07/principles-of-vasocomputation-a-unification-of-buddhist-phenomenology-active-inference-and-physical-reflex-part-i/" }
+    ],
+    hasDiagram: true,
+    scenario: {
+      enabled: true,
+      threshold: 0.25,
+      labels: {
+        grab: "Hyperprior Strength",
+        awareness: "Bias Recognition",
+        releaseRate: "Unlatch Rate",
+        metric: "Cognitive Flexibility",
+        goal: "Adaptive Priors"
+      }
+    },
+    sections: [
+      {
+        id: "sticky-patterns",
+        title: "Feeling Sticky Patterns",
+        content: wrap(
+          "Latched hyperpriors create a distinct sensation of 'stuckness'—patterns of thought, emotion, or behavior that feel locked in place and resistant to change. These aren't just mental habits; they have a physical component that feels like deeply held tension that maintains itself."
+        )
+      },
+      {
+        id: "bias-embodiment",
+        title: "Embodied Cognitive Bias",
+        content: wrap(
+          "When hyperpriors latch, they create a bodily bias toward certain interpretations and responses. You might notice this as a 'pull' toward familiar patterns, even when they're no longer appropriate. The body literally holds these biases as sustained vascular tensions."
+        )
+      },
+      {
+        id: "latch-mechanism",
+        title: "The Latching Process",
+        content: wrap(
+          "When vascular tension is sustained long enough, the latch-bridge mechanism engages, allowing the contraction to maintain itself with minimal energy. This creates a hyperprior—a deeply held assumption that biases all future perception and action until consciously unlatched."
+        )
+      }
     ]
   },
 
@@ -406,6 +590,30 @@ export const concepts: Record<string, Concept> = {
     prereqs: ["sohms"],
     references: [
       { title: "Neural Annealing — Opentheory", url: "https://opentheory.net/2019/12/neural-annealing-toward-a-neural-theory-of-everything/" }
+    ],
+    hasDiagram: true,
+    sections: [
+      {
+        id: "pattern-heating",
+        title: "Feeling Pattern Consolidation",
+        content: wrap(
+          "Neural annealing feels like a warming, softening process where rigid patterns gradually become more fluid and harmonious. You might notice this during meditation or therapy when old tensions begin to dissolve and reorganize into more comfortable configurations."
+        )
+      },
+      {
+        id: "harmonic-settling",
+        title: "Settling into Harmony",
+        content: wrap(
+          "As patterns anneal, there's often a felt sense of 'settling' or 'finding the right place.' Conflicting tensions resolve into more stable, lower-energy configurations. This process can feel like puzzle pieces clicking into place or knots untying themselves."
+        )
+      },
+      {
+        id: "remodeling-mechanism",
+        title: "Structural Remodeling",
+        content: wrap(
+          "Neural annealing involves the actual restructuring of connection patterns to minimize internal conflict and energy expenditure. In vasocomputation terms, this might correspond to vascular tensions reorganizing themselves into more sustainable and harmonious arrangements."
+        )
+      }
     ]
   }
 };

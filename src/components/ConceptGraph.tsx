@@ -69,6 +69,15 @@ export default function ConceptGraph({ selected, onSelect, height = 580 }: Props
       .attr("stroke-width", 2)
       .style("filter", (d: any) => (d.id === selected ? "drop-shadow(0 0 10px rgba(14,165,233,.6))" : "none"));
 
+    // Add hover interactions for a subtle enlarge effect
+    node
+      .on("mouseenter", function () {
+        d3.select(this).select("circle").transition().duration(120).attr("r", 16);
+      })
+      .on("mouseleave", function (_e, d: any) {
+        d3.select(this).select("circle").transition().duration(120).attr("r", d.id === selected ? 20 : 13);
+      });
+
     node
       .append("text")
       .text((d: any) => concepts[d.id].title)
@@ -105,7 +114,7 @@ export default function ConceptGraph({ selected, onSelect, height = 580 }: Props
     return () => {
       simulation.stop();
     };
-  }, [nodes, links, onSelect, selected, completed]);
+  }, [nodes, links, onSelect, selected, completed, height]);
 
   return <svg ref={ref} className="w-full" style={{ height }}></svg>;
 }

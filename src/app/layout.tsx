@@ -15,7 +15,7 @@ import { ProgressProvider } from "@/components/ProgressProvider";
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>
+      <body suppressHydrationWarning>
         <ProgressProvider>
           <header className="sticky top-0 z-50 border-b border-slate-800 bg-[#0b1020]/80 backdrop-blur supports-[backdrop-filter]:bg-[#0b1020]/60">
             <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
