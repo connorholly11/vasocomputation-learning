@@ -154,6 +154,7 @@ export const concepts: Record<string, Concept> = {
       answerIndex: 1,
       explain: "Johnson highlights taṇhā as a quick 'grab' dynamic that maps onto prediction/compression drives."
     },
+    hasDiagram: true,
     scenario: {
       enabled: true,
       threshold: 0.4,
