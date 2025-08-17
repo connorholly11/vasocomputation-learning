@@ -58,14 +58,14 @@ export default function LessonPage() {
       <nav className="not-prose mt-10 flex items-center justify-between text-sm">
         <div>
           {prev && (
-            <button className="btn" onClick={() => router.push(`/learn/${prev}`)}>
+            <button className="btn" onClick={() => router.push(`/learn/${prev}`, { scroll: false })}>
               ← {concepts[prev].title}
             </button>
           )}
         </div>
         <div>
           {next && (
-            <button className="btn" onClick={() => router.push(`/learn/${next}`)}>
+            <button className="btn" onClick={() => router.push(`/learn/${next}`, { scroll: false })}>
               {concepts[next].title} →
             </button>
           )}
