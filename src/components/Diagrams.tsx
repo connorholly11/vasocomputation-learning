@@ -10,14 +10,15 @@ export function ConceptDiagram({ id }: { id: string }) {
             <path d="M0,0 L0,6 L9,3 z" fill="#7dd3fc" />
           </marker>
         </defs>
-        <rect x="40" y="40" width="480" height="18" rx="9" fill="#0ea5e9" opacity=".15"/>
-        <rect x="40" y="40" width="260" height="18" rx="9" fill="#f472b6" opacity=".35"/>
-        <line x1="340" y1="35" x2="340" y2="65" stroke="#7dd3fc" strokeWidth="2" strokeDasharray="4 4"/>
-        <text x="338" y="28" textAnchor="end" fill="#7dd3fc" fontSize="12">latch threshold</text>
-        <text x="40" y="90" fill="#e2e8f0" fontSize="12">avoid ←</text>
-        <text x="500" y="90" fill="#e2e8f0" fontSize="12" textAnchor="end">→ approach</text>
-        <line x1="280" y1="82" x2="340" y2="50" stroke="#7dd3fc" strokeWidth="2" markerEnd="url(#arrowThin)"/>
-        <text x="278" y="86" fill="#94a3b8" fontSize="12">quick 'grab'</text>
+        <rect x="40" y="50" width="480" height="18" rx="9" fill="#0ea5e9" opacity=".15"/>
+        <rect x="40" y="50" width="260" height="18" rx="9" fill="#f472b6" opacity=".35"/>
+        <line x1="340" y1="45" x2="340" y2="75" stroke="#7dd3fc" strokeWidth="2" strokeDasharray="4 4"/>
+        <text x="340" y="38" textAnchor="middle" fill="#7dd3fc" fontSize="12">latch threshold</text>
+        <text x="40" y="100" fill="#e2e8f0" fontSize="12">push away ←</text>
+        <text x="500" y="100" fill="#e2e8f0" fontSize="12" textAnchor="end">→ grasp</text>
+        <line x1="300" y1="20" x2="340" y2="45" stroke="#7dd3fc" strokeWidth="2" markerEnd="url(#arrowThin)"/>
+        <text x="298" y="16" fill="#94a3b8" fontSize="12" textAnchor="end">grab (25-100ms)</text>
+        <text x="180" y="65" fill="#e2e8f0" fontSize="11" textAnchor="middle">tension/suffering</text>
       </svg>
     );
   }
