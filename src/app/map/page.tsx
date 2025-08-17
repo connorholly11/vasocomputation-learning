@@ -1,11 +1,11 @@
 "use client";
 import ConceptGraph from "@/components/ConceptGraph";
 import { concepts } from "@/lib/concepts";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 
-export default function MapPage() {
+function MapContent() {
   const search = useSearchParams();
   const router = useRouter();
   const initial = search.get("c") ?? "vasocomputation";
@@ -39,5 +39,13 @@ export default function MapPage() {
         </div>
       </aside>
     </section>
+  );
+}
+
+export default function MapPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <MapContent />
+    </Suspense>
   );
 }
